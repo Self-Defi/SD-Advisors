@@ -1,281 +1,99 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="assets/images/self-defi-logo.png">
-<meta property="og:image" content="assets/images/self-defi-logo.png">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Self‑Defi | Advisors — Digital Sovereignty Architect</title>
-<meta content="Self‑Defi Advisors: Multisig vaults, self‑custody systems, DAO onboarding, and DeFi banking structures." name="description"/>
-<meta content="Self‑Defi Advisors — Digital Sovereignty Architect" property="og:title"/>
-<meta content="Multisig vaults • Self‑custody • DAO onboarding • DeFi banking" property="og:description"/>
-<meta content="website" property="og:type"/>
-<style>
-    :root{
-      --bg0: #0b0b0c;
-      --bg1: #111214;
-      --fg:  #e7e7ea;
-      --fg-dim:#b7b7bd;
-      --gold:#d7b56d;
-      --gold-2:#ffcf73;
-      --card:#15171b;
-      --muted:#646a76;
-      --ok:#66d9a3;
-      --warn:#ffb65c;
-      --err:#ff6e6e;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --radius: 14px;
-      --radius-sm: 12px;
-      --radius-lg: 18px;
-      --maxw: 1160px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background: radial-gradient(1200px 800px at 20% -10%, rgba(215,181,109,.15), transparent 50%), linear-gradient(180deg, var(--bg0), var(--bg1)); color:var(--fg); font: 15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji}
-    a{color:var(--gold-2); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
-    
-    /* Prefer no blur by default to avoid choppy scroll on some GPUs */
-    @media (min-width: 900px){
-      
-    }
-    /* When scrolled, go solid to eliminate any compositing jitter */
-    
-    
-    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px}
-    .shield{width:26px; height:26px; border-radius:8px; background: linear-gradient(145deg, #050506, #191a1e); border:1px solid rgba(255,255,255,.08); display:grid; place-items:center; box-shadow: inset 0 1px 0 rgba(255,255,255,.05)}
-    .shield:before{content:"🛡"; filter:drop-shadow(0 0 4px rgba(215,181,109,.45))}
-    
-    .hero{padding:78px 0 48px}
-    .grid-2{display:grid; gap:28px; grid-template-columns:1.1fr .9fr}
-    @media (max-width: 900px){.grid-2{grid-template-columns:1fr} .hero{padding:52px 0 24px}}
-    .badge{display:inline-flex; align-items:center; gap:8px; font-size:12px; padding:6px 10px; border-radius:999px; background:linear-gradient(180deg,#16181c,#111318); border:1px solid rgba(255,255,255,.08); color:var(--fg-dim)}
-    .h1{font-size:42px; line-height:1.1; letter-spacing:-.2px; margin:14px 0 12px}
-    .lead{font-size:18px; color:var(--fg-dim); max-width:62ch}
-    .cta{display:flex; gap:12px; margin-top:22px; flex-wrap:wrap}
-    .btn{padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg,#1b1d22,#14161a); color:var(--fg); font-weight:600; box-shadow: var(--shadow)}
-    .btn.gold{
-            background: linear-gradient(135deg, #0a0a0a 0%, #1c1407 35%, #b8913e 70%, #f3d18c 100%);
-            border: 1px solid rgba(255,220,150,.4);
-            color: #fcebb4;
-            box-shadow: 0 2px 10px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.08);
-            transition: all 0.3s ease;
-        }
-        .btn.gold:hover{box-shadow:0 0 20px rgba(243,209,140,.4);
-            background: linear-gradient(135deg, #1a1206 0%, #b8913e 40%, #f3d18c 100%);
-            box-shadow: 0 4px 16px rgba(247,210,120,.45);
-            transform: translateY(-1px);
-        }
-    .btn.ghost{background:transparent; border-color: rgba(255,255,255,.12)}
-    .card{background:linear-gradient(180deg,#16181c,#101216); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); box-shadow: var(--shadow)}
-    .card-in{padding:18px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
-    .chip{font-size:12px; padding:6px 10px; border-radius:999px; background:#121419; 
-    border:1px solid rgba(255,255,255,.06); color:var(--fg-dim); 
-    transition: all .3s ease;}
-    .chip:hover{color:#f3d18c; text-shadow:0 0 8px rgba(243,209,140,.5);}
-    .section{padding:44px 0}
-    .h2{font-size:24px; margin:0 0 14px}
-    .muted{color:var(--fg-dim)}
-    .cols{display:grid; gap:18px; grid-template-columns: repeat(3, 1fr)}
-    @media (max-width: 980px){.cols{grid-template-columns:1fr 1fr}}
-    @media (max-width: 640px){.cols{grid-template-columns:1fr}}
-    .item h3{margin:8px 0 6px; font-size:17px}
-    .check{color:var(--ok)}
-    .warn{color:var(--warn)}
-    .process{display:grid; gap:14px; grid-template-columns: repeat(4, 1fr)}
-    @media (max-width: 980px){.process{grid-template-columns: repeat(2,1fr)}}
-    @media (max-width: 560px){.process{grid-template-columns: 1fr}}
-    .step{position:relative; padding:16px; border-radius:var(--radius-sm); background:linear-gradient(180deg,#14161a,#0f1115); border:1px solid rgba(255,255,255,.06)}
-    .step .num{position:absolute; top:10px; right:12px; font-weight:700; color:var(--gold-2); opacity:.9}
-    .hl{color:var(--gold-2)}
-    .quote{padding:16px; border-left:3px solid var(--gold); background:linear-gradient(180deg,#15171b,#101215); border-radius: 10px}
-    .footer{padding:30px 0 60px; color:#8b8f98; border-top:1px solid rgba(255,255,255,.06); margin-top:36px}
-    .tiny{font-size:12px; color:#8b8f98}
-    .kpi{display:grid; grid-template-columns:repeat(4,1fr); gap:14px}
-    @media(max-width: 840px){.kpi{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width: 520px){.kpi{grid-template-columns:1fr}}
-    .kpi .box{padding:16px; border-radius:var(--radius); border:1px solid rgba(255,255,255,.06); background:linear-gradient(180deg,#17191d,#101216); text-align:center}
-    .kpi .n{font-size:26px; font-weight:800; letter-spacing:-.5px}
-  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Consultation — SD Advisory Group</title>
+  <meta name="theme-color" content="#0b0f17">
+  <link rel="icon" type="image/png" href="assets/images/self-defi-logo.png">
+  <meta property="og:image" content="assets/images/self-defi-logo.png">
 
-    /* === Shimmer Animation for All Buttons === */
-    .btn{
-        position: relative;
-        overflow: hidden;
-        isolation: isolate;
-    }
-    .btn::before{
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.15) 50%, rgba(255,255,255,0) 100%);
-        transform: skewX(-20deg);
-        opacity: 0;
-        transition: opacity .2s ease;
-        pointer-events: none;
-    }
-    .btn:hover::before{
-        animation: shimmer 1.2s ease forwards;
-        opacity: 1;
-    }
-    @keyframes shimmer {
-        0% { left: -75%; opacity: .15; }
-        50% { left: 125%; opacity: .25; }
-        100% { left: 125%; opacity: 0; }
-    }
-    </style>
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Self‑Defi Advisors",
-    "url": "https://ipfs.io/ipfs/QmVELeCcM6UyeqyP2vGodmdPofxVGTofw9TkpMVLRDXzPh/",
-    "sameAs": ["https://cal.com/selfdeficonsultant/15min15min"],
-    "logo": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><text x='50%' y='54%' dominant-baseline='middle' text-anchor='middle'>🛡</text></svg>",
-    "description": "Digital Sovereignty Architect — Multisig vaults, self‑custody systems, DAO onboarding, DeFi banking structures."
-  }
-  </script>
-<style>.hero{padding-top:64px} @media (max-width:900px){.hero{padding-top:36px}}
+  <!-- Sitewide nav styles -->
+  <style>
+    nav.nav{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-family:'Arial',sans-serif;font-weight:500;margin-top:12px}
+    nav.nav a{color:#fff;text-decoration:none;transition:.3s}
+    nav.nav a:hover{color:#00bcd4}
+  </style>
 
-    /* === Shimmer Animation for All Buttons === */
-    .btn{
-        position: relative;
-        overflow: hidden;
-        isolation: isolate;
-    }
-    .btn::before{
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.15) 50%, rgba(255,255,255,0) 100%);
-        transform: skewX(-20deg);
-        opacity: 0;
-        transition: opacity .2s ease;
-        pointer-events: none;
-    }
-    .btn:hover::before{
-        animation: shimmer 1.2s ease forwards;
-        opacity: 1;
-    }
-    @keyframes shimmer {
-        0% { left: -75%; opacity: .15; }
-        50% { left: 125%; opacity: .25; }
-        100% { left: 125%; opacity: 0; }
-    }
-    </style></head>
-\1
+  <!-- Page styles (same as index for consistent look) -->
+  <style>
+    :root{--ink:#e9edf1;--muted:#a9b0bb;--bg:#070a0f;--panel:#0c1220;--gold1:#f9df96;--gold2:#b9861b;--orange:#ff8a00;--blue:#0fb0ff;--accent:#ffb300;--line:rgba(255,255,255,.14)}
+    *{box-sizing:border-box} html,body{height:100%;margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    a{color:var(--ink);text-decoration:none}
+    .container{width:min(1200px,92vw);margin:auto;padding:0 20px}
+    .section{padding:72px 0}
+    h1,h2,h3{margin:0 0 10px}
+    h2{font-size:clamp(30px,5.2vw,44px);line-height:1.15}
+    p.lead{font-size:18px;color:var(--muted);line-height:1.6;max-width:860px}
+    body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+      radial-gradient(1200px 600px at 18% 40%, rgba(255,138,0,.35), transparent 60%),
+      radial-gradient(1200px 600px at 82% 22%, rgba(15,176,255,.35), transparent 60%),
+      linear-gradient(135deg,#000 0%,#0b1220 35%,#101d2e 62%,#0b1220 82%,#000 100%);filter:saturate(1.12) brightness(1.02)}
+    body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(80% 60% at 50% 30%, transparent 60%, rgba(0,0,0,.35) 100%)}
+    .header{position:sticky;top:0;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(180deg, rgba(8,12,22,.85), rgba(8,12,22,.55));border-bottom:1px solid var(--line);z-index:50}
+    .header .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(180deg,#222,#000);box-shadow:0 0 20px rgba(255,179,0,.14), inset 0 0 12px rgba(255,255,255,.06);position:relative;overflow:hidden}
+    .logo::after{content:"";position:absolute;inset:2px;border-radius:6px;background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);opacity:.55;mix-blend-mode:screen}
+    .brand .txt{line-height:1}.brand .name{font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:14px}.brand .sub{font-size:11px;letter-spacing:.2em;opacity:.7}
+    .nav a{margin-left:18px;font-weight:700;opacity:.85}.nav a:hover{opacity:1}
+    @media (max-width:760px){.nav{display:none}}
+    .btn{display:inline-block;padding:14px 22px;border-radius:14px;font-weight:800;letter-spacing:.02em;color:#101012;background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);border:1px solid rgba(255,219,140,.7);box-shadow:0 18px 32px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.6);position:relative;overflow:hidden}
+    .btn::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.25)18%,rgba(255,255,255,0)36%);transform:translateX(-120%);transition:transform .8s ease}
+    .btn:hover::after{transform:translateX(120%)}
+    .btn.secondary{background:#0e1524;color:var(--ink);border:1px solid rgba(255,255,255,.14)}
+    .center{text-align:center}.mt14{margin-top:14px}.mt18{margin-top:18px}
+  </style>
+</head>
+<body>
+
+<!-- Site nav (project-relative) -->
 <nav class="nav" aria-label="Site">
-  <a href="/index.html">Home</a>
-  <a href="/consultation.html">Consultation</a>
-  <a href="/business.html">Business Page</a>
+  <a href="./index.html">Home</a>
+  <a href="./consultation.html">Consultation</a>
+  <a href="./business.html">Business Page</a>
   <a href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book</a>
 </nav>
 
-<main class="wrap">
-<section class="hero grid-2">
-<div>
-<span class="badge">🛡 Digital Sovereignty Architect</span>
-<h1 class="h1" style="text-shadow: 0 0 12px rgba(215,181,109,.35);">
-    Your Assets. <span class="hl" style="color:#f3d18c; text-shadow:0 0 10px rgba(243,209,140,.55);">Your Control.</span> Your Strategy.
-    </h1>
-    <p class="lead" style="color:var(--fg-dim); text-shadow:0 0 6px rgba(215,181,109,.25);">
-    SD Advisory Group delivers live, one-on-one and small-group consultations via video or phone to help investors and entrepreneurs gain control over their digital assets with confidence.
-    We specialize in secure custody setup, digital asset organization, and personalized growth strategies — all delivered through direct, high-impact advisory sessions.
-    Grounded in practical experience, our goal is to make digital asset management simple, transparent, and self-directed.
-    </p>
-<div class="chips">
-<span class="chip">Cold storage playbooks</span>
-<span class="chip">Safe{Wallet} UX for vaults</span>
-<span class="chip">Bitcoin reserve policy</span>
-<span class="chip">RWA tokenization readiness</span>
-</div>
-<div class="cta">
-<a class="btn gold" href="https://cal.com/selfdeficonsultant/15min15min" rel="noopener" target="_blank">Book a 15‑min intro</a>
-<a class="btn ghost" href="https://ipfs.io/ipfs/bafybeicfpc32ymrqus6g3a6mauclzawj5wc72d3c5qiv4p55igzybycijy/" rel="noopener" target="_blank">Business Page</a>
-</div>
-</div>
-<div class="card">
-<div class="card-in">
-<div class="kpi">
-<div class="box"><div class="n">0</div><div class="tiny">Custody Risk Added</div></div>
-<div class="box"><div class="n">24/7</div><div class="tiny">Operational Uptime Patterns</div></div>
-<div class="box"><div class="n">3‑5</div><div class="tiny">Key‑holder Schemes</div></div>
-<div class="box"><div class="n">∞</div><div class="tiny">Sovereign Options</div></div>
-</div>
-<p class="tiny" style="margin-top:10px;">We design for resilience: cold storage, multi‑sig quorum, key ceremonies, timelocks, and emergency runbooks.</p>
-</div>
-</div>
-</section>
-<section class="section" id="services">
-<h2 class="h2">What we deliver</h2>
-<p class="muted">Focused packages for founders, family offices, DAOs, and schools.</p>
-<div class="cols">
-<div class="item card"><div class="card-in">
-<h3>Bitcoin Reserve Vault</h3>
-<p class="muted">Policy + playbook, key ceremony, 2‑of‑3 or 3‑of‑5, hardware segregation, recovery drills.</p>
-<ul class="muted">
-<li><span class="check">✔</span> Coldcard / Keystone flows</li>
-<li><span class="check">✔</span> Multisig with Safe‑style UX</li>
-<li><span class="check">✔</span> Timelocks &amp; spend limits</li>
-</ul>
-</div></div>
-<div class="item card"><div class="card-in">
-<h3>DeFi Banking Stack</h3>
-<p class="muted">Smart‑account treasury with spend policies, role control, and approvals for stable operations.</p>
-<ul class="muted">
-<li><span class="check">✔</span> Safe{Wallet} governance</li>
-<li><span class="check">✔</span> Off‑ramp / on‑ramp mapping</li>
-<li><span class="check">✔</span> Audit‑ready runbooks</li>
-</ul>
-</div></div>
-<div class="item card"><div class="card-in">
-<h3>Personalized Growth Strategies</h3>
-<p class="muted">Tailored advisory for individuals and teams to strengthen self-custody practices, optimize capital structure, and build sustainable digital wealth systems.</p>
-<ul class="muted">
-<li><span class="check">✔</span> Portfolio structure & capital flow mapping</li>
-<li><span class="check">✔</span> Custom self-custody stack design</li>
-<li><span class="check">✔</span> Performance and growth frameworks</li>
-</ul>
-</div></div>
-</div>
-</section>
-<section class="section" id="process">
-<h2 class="h2">How we build sovereign systems</h2>
-<div class="process">
-<div class="step"><span class="num">1</span><strong>Assess</strong><br/><span class="muted">Map assets, roles, risk surface, and constraints.</span></div>
-<div class="step"><span class="num">2</span><strong>Design</strong><br/><span class="muted">Choose custody model, quorum, devices, and key flows.</span></div>
-<div class="step"><span class="num">3</span><strong>Implement</strong><br/><span class="muted">Set up vaults, policies, automations, and monitoring.</span></div>
-<div class="step"><span class="num">4</span><strong>Drill</strong><br/><span class="muted">Run recovery tests, incident tabletop, and rotation.</span></div>
-</div>
-<p class="quote" style="margin-top:16px">“Sovereignty isn’t a product. It’s a practice.” — <span class="hl">Self‑Defi</span></p>
-</section>
-<section class="section" id="contact">
-<h2 class="h2">Book a consultation</h2>
-<p class="muted">Pick a time and we’ll scope a lean proof‑of‑concept that scales.</p>
-<div class="cta">
-<a class="btn gold" href="https://cal.com/selfdeficonsultant/15min15min" rel="noopener" target="_blank">Start with 15‑min</a>
-<a class="btn" href="https://ipfs.io/ipfs/QmVELeCcM6UyeqyP2vGodmdPofxVGTofw9TkpMVLRDXzPh/" rel="noopener" target="_blank">Primary site (IPFS)</a>
-</div>
-</section>
+<header class="header">
+  <div class="container wrap" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
+    <a class="brand" href="#top" style="text-decoration:none;color:var(--ink)">
+      <div class="logo" aria-hidden="true"></div>
+      <div class="txt">
+        <div class="name">SD Advisory Group</div>
+        <div class="sub">Powered by Self-Defi</div>
+      </div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="./index.html#services">Services</a>
+      <a href="./index.html#process">Process</a>
+      <a href="./index.html#credentials">Credentials</a>
+      <a href="./index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="section center">
+    <div class="container">
+      <h1>Book a Consultation</h1>
+      <p class="lead">Choose a short intro or a deep-dive session. All calls are video or phone — practical, direct, and private.</p>
+      <div class="mt18">
+        <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book 15-Minute Intro</a>
+      </div>
+      <div class="mt14">
+        <a class="btn secondary" href="https://cal.com/selfdeficonsultant/30min" target="_blank" rel="noopener">Book 30-Minute Session</a>
+      </div>
+    </div>
+  </section>
 </main>
+
 <footer class="footer">
-<div class="wrap tiny">
-<div>Certified Bitcoin Professional (CBP) | Certified Ethereum Professional (CEP) | Digital Sovereignty Architect (DSA)</div>
-<div style="margin-top:6px;">© <span id="y"></span> Self‑Defi Advisors. All rights reserved.</div>
-</div>
+  <div class="container center">
+    <small>SD Advisory Group — Powered by Self-Defi</small>
+  </div>
 </footer>
-<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
-<footer class="footer" style="padding:26px 0; text-align:center; border-top:1px solid rgba(255,255,255,.14); opacity:.9; margin-top:36px">
-  <small>SD Advisory Group — Powered by Self‑Defi</small>
-  <div style="margin-top:8px"><a href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book a 15‑minute intro</a></div>
-</footer>
+
 </body>
 </html>
