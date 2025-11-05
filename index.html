@@ -10,10 +10,9 @@
 <style>
 :root{
   --ink:#e9edf1; --muted:#a9b0bb;
-  --bg:#070a0f; --panel:#0c1220;
-  --gold1:#f9df96; --gold2:#b9861b;
-  --orange:#ff8a00; --blue:#0fb0ff; --accent:#ffb300;
-  --line: rgba(255,255,255,.14);
+  --bg:#070a0f; --gold1:#f9df96; --gold2:#b9861b;
+  --blue:#0fb0ff; --accent:#ffb300;
+  --line:rgba(255,255,255,.14);
 }
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
@@ -24,9 +23,8 @@ a{color:var(--ink);text-decoration:none}
 h1,h2,h3{margin:0 0 10px}
 h2{font-size:clamp(30px,5.2vw,44px);line-height:1.15}
 p.lead{font-size:18px;color:var(--muted);line-height:1.6;max-width:880px;margin:0 auto}
-hr.sep{height:1px;border:0;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:20px 0}
 
-/* Background effects */
+/* background */
 body::before{
   content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;
   background:
@@ -40,7 +38,7 @@ body::after{
   background: radial-gradient(80% 60% at 50% 30%, transparent 60%, rgba(0,0,0,.35) 100%);
 }
 
-/* --- Global Site Nav (SIMPLIFIED) --- */
+/* nav */
 .site-nav{
   position:sticky; top:0; z-index:60;
   backdrop-filter:saturate(140%) blur(8px);
@@ -48,32 +46,26 @@ body::after{
   border-bottom:1px solid var(--line);
 }
 .site-nav .wrap{
-  display:flex; justify-content:center; gap:min(5.2vw,34px); padding:12px 0;
+  display:flex;justify-content:center;gap:min(5.2vw,34px);padding:12px 0;
 }
-.site-nav a{
-  font-weight:800; letter-spacing:.02em; opacity:.92; white-space:nowrap;
-}
-.site-nav a:hover, .site-nav a.active{opacity:1; color:var(--gold1)}
+.site-nav a{font-weight:800;letter-spacing:.02em;opacity:.92;white-space:nowrap}
+.site-nav a:hover,.site-nav a.active{opacity:1;color:var(--gold1)}
 
-/* Compact brand bar */
+/* header */
 .header{
   position:sticky; top:48px; z-index:50;
   backdrop-filter:saturate(140%) blur(8px);
   background:linear-gradient(180deg, rgba(8,12,22,.85), rgba(8,12,22,.55));
   border-bottom:1px solid var(--line);
 }
-.header .wrap{
-  display:flex; align-items:center; justify-content:center; padding:12px 0;
-}
+.header .wrap{display:flex;align-items:center;justify-content:center;padding:12px 0}
 .brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
-.logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(180deg,#222,#000);
-  box-shadow:0 0 20px rgba(255,179,0,.14), inset 0 0 12px rgba(255,255,255,.06);position:relative;overflow:hidden}
-.logo::after{content:"";position:absolute;inset:2px;border-radius:6px;
-  background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);opacity:.55;mix-blend-mode:screen;}
+.logo{width:52px;height:52px;border-radius:8px;overflow:hidden;flex-shrink:0}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
 .name{font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:15px;line-height:1}
 .sub{font-size:11px;letter-spacing:.15em;opacity:.75;line-height:1}
 
-/* Buttons */
+/* buttons */
 .btn{display:inline-block;padding:14px 22px;border-radius:14px;font-weight:800;letter-spacing:.02em;color:#101012;
   background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);
   border:1px solid rgba(255,219,140,.7);box-shadow:0 18px 32px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.6);
@@ -84,45 +76,36 @@ body::after{
 .btn.secondary{background:#0e1524;color:var(--ink);border:1px solid rgba(255,255,255,.14)}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 
-/* Hero */
+/* hero */
 .hero{padding:84px 0 44px;text-align:center}
 .kicker{font-weight:900;letter-spacing:.32em;font-size:12px;opacity:.7;text-transform:uppercase}
 .title{font-size:clamp(36px,6vw,62px);line-height:1.08;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .title em{color:var(--gold1);font-style:normal}
-.subtxt{margin:12px auto 0;color:var(--muted);font-size:18px;line-height:1.6;max-width:880px}
+.subtxt{margin:12px auto 0;color:var(--muted);font-size:18px;max-width:880px}
 .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 .accent{height:3px;width:min(360px,60vw);margin:18px auto;background:linear-gradient(90deg,var(--accent),#fcb040,var(--blue));border-radius:3px;opacity:.95}
 
-/* Grid + cards */
+/* grids */
 .grid{display:grid;gap:18px}
 .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-@media (max-width:960px){.grid.cols-3{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.grid.cols-3{grid-template-columns:1fr}}
+@media(max-width:960px){.grid.cols-3{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.grid.cols-3{grid-template-columns:1fr}}
 .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:18px;box-shadow:0 16px 30px rgba(0,0,0,.35)}
 .card h4{margin:0 0 6px;font-size:18px}
 .card p{margin:6px 0 0;color:var(--muted)}
-.icon{width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:8px;
-  background:linear-gradient(180deg,#121826,#0b1220);border:1px solid rgba(255,255,255,.10)}
-
-/* Steps */
-.step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.16);
-  border-radius:14px;padding:14px}
+.step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.16);border-radius:14px;padding:14px}
 .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);color:#111;font-weight:900;border:1px solid rgba(255,219,140,.6)}
-
-/* Pricing */
 .pricing{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
-@media (max-width:960px){.pricing{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.pricing{grid-template-columns:1fr}}
-.tier{position:relative;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px 18px 20px}
+@media(max-width:960px){.pricing{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.pricing{grid-template-columns:1fr}}
+.tier{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px;position:relative;overflow:hidden}
 .tier::before{content:"";position:absolute;inset:-30% -10% 50% -10%;background:radial-gradient(60% 40% at 40% 50%, rgba(255,138,0,.18), transparent 62%);pointer-events:none;filter:blur(16px)}
 .tier h4{margin:4px 0 6px;font-size:20px}
 .tier .desc{color:var(--muted);font-size:14px;margin:6px 0 12px}
 .tier .price{font-weight:900;font-size:24px;margin:6px 0 10px}
 .tier ul{padding-left:16px;margin:10px 0 14px}
 .tier li{margin:6px 0;color:var(--muted)}
-
-/* Footer */
 .footer{padding:26px 0;text-align:center;border-top:1px solid var(--line);opacity:.92}
 .footer small{display:block;letter-spacing:.18em;text-transform:uppercase}
 .center{text-align:center}
@@ -132,7 +115,6 @@ body::after{
 </head>
 <body>
 
-<!-- GLOBAL NAV: only the 5 items you requested -->
 <nav class="site-nav" aria-label="Main navigation">
   <div class="container wrap">
     <a class="active" href="index.html">Home</a>
@@ -143,11 +125,10 @@ body::after{
   </div>
 </nav>
 
-<!-- Compact brand bar -->
 <header class="header">
   <div class="container wrap">
     <a class="brand" href="index.html">
-      <div class="logo" aria-hidden="true"></div>
+      <div class="logo"><img src="assets/images/self-defi-logo.png" alt="Self-Defi Logo"></div>
       <div>
         <div class="name">SD Advisory Group</div>
         <div class="sub">Powered by Self-Defi</div>
@@ -157,7 +138,6 @@ body::after{
 </header>
 
 <main id="top">
-  <!-- HERO -->
   <section class="hero center">
     <div class="container">
       <div class="kicker">Live Advisory • Video & Phone</div>
@@ -174,129 +154,32 @@ body::after{
     </div>
   </section>
 
-  <!-- VALUE CARDS -->
   <section class="section">
     <div class="container">
       <div class="grid cols-3">
-        <div class="card">
-          <div class="icon" aria-hidden="true">🛡️</div>
-          <h4>Custody Confidence</h4>
-          <p>From wallet selection to backups and movement — execute safely with repeatable flows.</p>
-        </div>
-        <div class="card">
-          <div class="icon" aria-hidden="true">🧭</div>
-          <h4>Organized Portfolio</h4>
-          <p>Structure, labeling, and documentation across exchange and on-chain holdings.</p>
-        </div>
-        <div class="card">
-          <div class="icon" aria-hidden="true">📈</div>
-          <h4>Disciplined Growth</h4>
-          <p>Risk-aligned frameworks that prioritize sustainability over speculation.</p>
-        </div>
+        <div class="card"><h4>Custody Confidence</h4><p>From wallet selection to backups and movement — execute safely with repeatable flows.</p></div>
+        <div class="card"><h4>Organized Portfolio</h4><p>Structure, labeling, and documentation across exchange and on-chain holdings.</p></div>
+        <div class="card"><h4>Disciplined Growth</h4><p>Risk-aligned frameworks that prioritize sustainability over speculation.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" class="section">
-    <div class="container">
-      <h2 class="center">What We Do</h2>
-      <p class="lead">Advisory for modern investors and operators — focused on security, clarity, and repeatable execution.</p>
-      <div class="grid cols-3 mt18">
-        <div class="card">
-          <h4>Secure Custody Setup</h4>
-          <p>Device selection, wallet installs, seed handling, and movement flows — a usable, secure baseline.</p>
-        </div>
-        <div class="card">
-          <h4>Digital Asset Organization</h4>
-          <p>Portfolio structure, naming conventions, and documentation for full visibility.</p>
-        </div>
-        <div class="card">
-          <h4>Personalized Growth Strategy</h4>
-          <p>Clear, risk-aware strategies that match your goals and capital.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- APPROACH (anchor target) -->
   <section id="approach" class="section">
     <div class="container">
       <h2 class="center">Approach</h2>
       <div class="grid cols-3 mt18">
-        <div class="card step">
-          <div class="num">1</div>
-          <div>
-            <strong>Baseline & Goals</strong>
-            <p class="mt6">Quick discovery: current stack, capital mix, objectives. Confirm scope and outcomes.</p>
-          </div>
-        </div>
-        <div class="card step">
-          <div class="num">2</div>
-          <div>
-            <strong>Custody & Organization</strong>
-            <p class="mt6">Wallets, backups, movement flows; structure holdings for visibility and control.</p>
-          </div>
-        </div>
-        <div class="card step">
-          <div class="num">3</div>
-          <div>
-            <strong>Strategy & Rhythm</strong>
-            <p class="mt6">Sustainable playbook (rebalancing cadence, inflows, safety checks) and iteration.</p>
-          </div>
-        </div>
+        <div class="card step"><div class="num">1</div><div><strong>Baseline & Goals</strong><p>Quick discovery of current stack, capital mix, and objectives.</p></div></div>
+        <div class="card step"><div class="num">2</div><div><strong>Custody & Organization</strong><p>Wallets, backups, flows; structure holdings for clarity and control.</p></div></div>
+        <div class="card step"><div class="num">3</div><div><strong>Strategy & Rhythm</strong><p>Sustainable rebalancing cadence and safety checks for long-term execution.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
-  <section class="section">
-    <div class="container">
-      <h2 class="center">Pricing</h2>
-      <div class="pricing mt18">
-        <div class="tier">
-          <h4>Strategy Session</h4>
-          <div class="price">$100 / 60 min</div>
-          <div class="desc">Focused consult to solve a specific problem or decision.</div>
-          <ul>
-            <li>Video or phone</li>
-            <li>Action checklist after the call</li>
-            <li>48-hour follow-up support</li>
-          </ul>
-          <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book</a>
-        </div>
-        <div class="tier" style="border-color:rgba(255,219,140,.35)">
-          <h4>Onboarding Sprint (4 weeks)</h4>
-          <div class="price">Custom Scope</div>
-          <div class="desc">Hands-on transition to secure custody and organized holdings.</div>
-          <ul>
-            <li>Weekly live sessions</li>
-            <li>Wallet setup & documentation</li>
-            <li>Portfolio structure & risk plan</li>
-          </ul>
-          <a class="btn" href="consultation.html">Start</a>
-        </div>
-        <div class="tier">
-          <h4>Weekly Briefing</h4>
-          <div class="price">Request Invite</div>
-          <div class="desc">Accountability, Q&A, and shared momentum.</div>
-          <ul>
-            <li>Small-group format</li>
-            <li>Progress checks</li>
-            <li>Live questions</li>
-          </ul>
-          <a class="btn secondary" href="mailto:Self-Defi.Crypto@ud.me?subject=Weekly%20Briefing%20Request">Join</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT (anchor target) -->
   <section id="contact" class="section">
     <div class="container center">
       <h2>Contact</h2>
       <p class="lead">Email: <a href="mailto:Self-Defi.Crypto@ud.me">Self-Defi.Crypto@ud.me</a></p>
-      <p style="margin-top:8px" class="lead">Prefer a quick call? Book a time that works for you.</p>
+      <p class="lead" style="margin-top:8px">Prefer a quick call? Book a time that works for you.</p>
       <div class="mt14">
         <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book Consultation</a>
       </div>
