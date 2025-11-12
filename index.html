@@ -1,492 +1,89 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- =========================
-       META / HEAD
-  ========================== -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>SD Advisory Group — Powered by Self-Defi</title>
-
-  <meta
-    name="description"
-    content="Live, one-on-one and small-group consultations to help investors and entrepreneurs gain control over their digital assets with confidence. Secure custody setup, digital asset organization, and personalized growth strategies — direct, high-impact advisory."
-  />
+  <meta name="description" content="Live, one-on-one and small-group consultations to help investors and entrepreneurs gain control over their digital assets with confidence. Secure custody setup, digital asset organization, and personalized growth strategies — direct, high-impact advisory." />
   <meta name="theme-color" content="#0b0f17" />
-
-  <!-- Favicon / Social -->
   <link rel="icon" type="image/png" href="assets/images/self-defi-logo.png" />
-  <meta property="og:title" content="SD Advisory Group — Powered by Self-Defi" />
-  <meta property="og:description" content="Live, one-on-one and small-group consultations for secure custody, portfolio organization, and growth strategies." />
   <meta property="og:image" content="assets/images/self-defi-logo.png" />
-  <meta property="og:type" content="website" />
 
-  <!-- =========================
-       GLOBAL STYLES
-       (expanded for clarity)
-  ========================== -->
   <style>
     :root{
-      --ink:   #e9edf1;
-      --muted: #a9b0bb;
-
-      --bg:    #070a0f;
-
-      --gold1: #f9df96;
-      --gold2: #b9861b;
-
-      --blue:  #0fb0ff;
-      --accent:#ffb300;
-
-      --line:  rgba(255,255,255,.14);
+      --ink:#e9edf1; --muted:#a9b0bb; --bg:#070a0f;
+      --gold1:#f9df96; --gold2:#b9861b; --blue:#0fb0ff; --accent:#ffb300;
+      --line:rgba(255,255,255,.14);
     }
-
-    *{
-      box-sizing: border-box;
-    }
-
-    html,
-    body{
-      height: 100%;
-      margin: 0;
-    }
-
-    body{
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      color:       var(--ink);
-      background:  var(--bg);
-      line-height: 1.6;
-    }
-
-    a{
-      color:           var(--ink);
-      text-decoration: none;
-    }
-
-    .container{
-      width:   min(1200px, 92vw);
-      margin:  0 auto;
-      padding: 0 20px;
-    }
-
-    .section{
-      padding: 72px 0;
-    }
-
-    h1,
-    h2,
-    h3{
-      margin: 0 0 10px;
-    }
-
-    h2{
-      font-size:   clamp(30px, 5.2vw, 44px);
-      line-height: 1.15;
-    }
-
-    p.lead{
-      font-size:   18px;
-      color:       var(--muted);
-      line-height: 1.6;
-      max-width:   880px;
-      margin:      0 auto;
-    }
-
-    /* ----------------------------------
-       Background Atmospherics
-    ----------------------------------- */
-    body::before{
-      content:          "";
-      position:         fixed;
-      inset:            0;
-      z-index:          -3;
-      pointer-events:   none;
-      background:
-        radial-gradient(1200px 600px at 18% 40%, rgba(255,138,0,.35), transparent 60%),
-        radial-gradient(1200px 600px at 82% 22%, rgba(15,176,255,.35), transparent 60%),
-        linear-gradient(135deg, #000 0%, #0b1220 35%, #101d2e 62%, #0b1220 82%, #000 100%);
-      filter:           saturate(1.12) brightness(1.02);
-    }
-
-    body::after{
-      content:        "";
-      position:       fixed;
-      inset:          0;
-      z-index:        -2;
-      pointer-events: none;
-      background:     radial-gradient(80% 60% at 50% 30%, transparent 60%, rgba(0,0,0,.35) 100%);
-    }
-
-    /* ----------------------------------
-       Global Site Nav (5 items only)
-       Home • Consultation • Business • Contact • Approach
-    ----------------------------------- */
-    .site-nav{
-      position:        sticky;
-      top:             0;
-      z-index:         60;
-      backdrop-filter: saturate(140%) blur(8px);
-      background:      linear-gradient(180deg, rgba(8,12,22,.90), rgba(8,12,22,.66));
-      border-bottom:   1px solid var(--line);
-    }
-
-    .site-nav .wrap{
-      display:         flex;
-      justify-content: center;
-      gap:             min(5.2vw, 34px);
-      padding:         12px 0;
-    }
-
-    .site-nav a{
-      font-weight:     800;
-      letter-spacing:  .02em;
-      opacity:         .92;
-      white-space:     nowrap;
-    }
-
-    .site-nav a:hover,
-    .site-nav a.active{
-      opacity: 1;
-      color:   var(--gold1);
-    }
-
-    /* ----------------------------------
-       Compact Brand Bar (Logo + Name)
-    ----------------------------------- */
-    .header{
-      position:        sticky;
-      top:             48px;
-      z-index:         50;
-      backdrop-filter: saturate(140%) blur(8px);
-      background:      linear-gradient(180deg, rgba(8,12,22,.85), rgba(8,12,22,.55));
-      border-bottom:   1px solid var(--line);
-    }
-
-    .header .wrap{
-      display:         flex;
-      align-items:     center;
-      justify-content: center;
-      padding:         12px 0;
-    }
-
-    .brand{
-      display:         flex;
-      align-items:     center;
-      gap:             12px;
-      color:           var(--ink);
-    }
-
-    .logo{
-      width:         52px;
-      height:        52px;
-      border-radius: 8px;
-      overflow:      hidden;
-      flex-shrink:   0;
-    }
-
-    .logo img{
-      width:       100%;
-      height:      100%;
-      object-fit:  cover;
-      display:     block;
-    }
-
-    .name{
-      font-weight:     900;
-      letter-spacing:  .06em;
-      text-transform:  uppercase;
-      font-size:       15px;
-      line-height:     1;
-    }
-
-    .sub{
-      font-size:      11px;
-      letter-spacing: .15em;
-      opacity:        .75;
-      line-height:    1;
-    }
-
-    /* ----------------------------------
-       Buttons
-    ----------------------------------- */
-    .btn{
-      display:         inline-block;
-      padding:         14px 22px;
-      border-radius:   14px;
-      font-weight:     800;
-      letter-spacing:  .02em;
-      color:           #101012;
-      background:      linear-gradient(135deg, #f9df96 0%, #b9861b 45%, #0fb0ff 100%);
-      border:          1px solid rgba(255,219,140,.7);
-      box-shadow:      0 18px 32px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.6);
-      position:        relative;
-      overflow:        hidden;
-    }
-
-    .btn::after{
-      content:      "";
-      position:     absolute;
-      inset:        0;
-      background:   linear-gradient(120deg, rgba(255,255,255,.25) 18%, rgba(255,255,255,0) 36%);
-      transform:    translateX(-120%);
-      transition:   transform .8s ease;
-    }
-
-    .btn:hover::after{
-      transform: translateX(120%);
-    }
-
-    .btn.secondary{
-      background: #0e1524;
-      color:      var(--ink);
-      border:     1px solid rgba(255,255,255,.14);
-    }
-
-    .btn.ghost{
-      background: transparent;
-      color:      var(--ink);
-      border:     1px solid var(--line);
-    }
-
-    /* ----------------------------------
-       Hero
-    ----------------------------------- */
-    .hero{
-      padding:     84px 0 44px;
-      text-align:  center;
-    }
-
-    .kicker{
-      font-weight:     900;
-      letter-spacing:  .32em;
-      font-size:       12px;
-      opacity:         .7;
-      text-transform:  uppercase;
-    }
-
-    .title{
-      font-size:   clamp(36px, 6vw, 62px);
-      line-height: 1.08;
-      text-shadow: 0 2px 14px rgba(0,0,0,.5);
-    }
-
-    .title em{
-      color:       var(--gold1);
-      font-style:  normal;
-    }
-
-    .subtxt{
-      margin:      12px auto 0;
-      color:       var(--muted);
-      font-size:   18px;
-      max-width:   880px;
-    }
-
-    .hero .cta{
-      display:         flex;
-      gap:             14px;
-      justify-content: center;
-      flex-wrap:       wrap;
-      margin-top:      18px;
-    }
-
-    .accent{
-      height:        3px;
-      width:         min(360px, 60vw);
-      margin:        18px auto;
-      background:    linear-gradient(90deg, var(--accent), #fcb040, var(--blue));
-      border-radius: 3px;
-      opacity:       .95;
-    }
-
-    /* ----------------------------------
-       Grid / Cards
-    ----------------------------------- */
-    .grid{
-      display: grid;
-      gap:     18px;
-    }
-
-    .grid.cols-3{
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width: 960px){
-      .grid.cols-3{
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 640px){
-      .grid.cols-3{
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card{
-      background:    rgba(255,255,255,.04);
-      border:        1px solid rgba(255,255,255,.10);
-      border-radius: 16px;
-      padding:       18px;
-      box-shadow:    0 16px 30px rgba(0,0,0,.35);
-    }
-
-    .card h4{
-      margin:     0 0 6px;
-      font-size:  18px;
-    }
-
-    .card p{
-      margin: 6px 0 0;
-      color:  var(--muted);
-    }
-
-    /* ----------------------------------
-       Steps
-    ----------------------------------- */
-    .step{
-      display:         flex;
-      gap:             16px;
-      align-items:     flex-start;
-      background:      rgba(255,255,255,.03);
-      border:          1px dashed rgba(255,255,255,.16);
-      border-radius:   14px;
-      padding:         14px;
-    }
-
-    .num{
-      width:         34px;
-      height:        34px;
-      border-radius: 10px;
-      display:       flex;
-      align-items:   center;
-      justify-content: center;
-      background:    linear-gradient(135deg, #f9df96 0%, #b9861b 45%, #0fb0ff 100%);
-      color:         #111;
-      font-weight:   900;
-      border:        1px solid rgba(255,219,140,.6);
-    }
-
-    /* ----------------------------------
-       Pricing
-    ----------------------------------- */
-    .pricing{
-      display:               grid;
-      gap:                   18px;
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media (max-width: 960px){
-      .pricing{
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 640px){
-      .pricing{
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .tier{
-      background:     rgba(255,255,255,.04);
-      border:         1px solid rgba(255,255,255,.10);
-      border-radius:  18px;
-      padding:        18px;
-      position:       relative;
-      overflow:       hidden;
-    }
-
-    .tier::before{
-      content:     "";
-      position:    absolute;
-      inset:       -30% -10% 50% -10%;
-      background:  radial-gradient(60% 40% at 40% 50%, rgba(255,138,0,.18), transparent 62%);
-      pointer-events: none;
-      filter:      blur(16px);
-    }
-
-    .tier h4{
-      margin:     4px 0 6px;
-      font-size:  20px;
-    }
-
-    .tier .desc{
-      color:      var(--muted);
-      font-size:  14px;
-      margin:     6px 0 12px;
-    }
-
-    .tier .price{
-      font-weight: 900;
-      font-size:   24px;
-      margin:      6px 0 10px;
-    }
-
-    .tier ul{
-      padding-left: 16px;
-      margin:       10px 0 14px;
-    }
-
-    .tier li{
-      margin: 6px 0;
-      color:  var(--muted);
-    }
-
-    /* ----------------------------------
-       Footer
-    ----------------------------------- */
-    .footer{
-      padding:      26px 0;
-      text-align:   center;
-      border-top:   1px solid var(--line);
-      opacity:      .92;
-    }
-
-    .footer small{
-      display:         block;
-      letter-spacing:  .18em;
-      text-transform:  uppercase;
-    }
-
-    /* ----------------------------------
-       Form Inputs (Weekly Briefing)
-    ----------------------------------- */
-    .form-field{
-      width:          100%;
-      padding:        10px 12px;
-      margin:         6px 0 12px;
-      border-radius:  10px;
-      border:         1px solid rgba(255,255,255,.14);
-      background:     rgba(255,255,255,.06);
-      color:          var(--ink);
-    }
-
-    .form-field::placeholder{
-      color:   #c7ced8;
-      opacity: .7;
-    }
-
-    .helper{
-      font-size: 13px;
-      color:     var(--muted);
-      margin-top: 6px;
-    }
-
-    /* Utilities */
-    .center{ text-align: center; }
-    .mt6{   margin-top: 6px; }
-    .mt14{  margin-top: 14px; }
-    .mt18{  margin-top: 18px; }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+    a{color:var(--ink);text-decoration:none}
+    .container{width:min(1200px,92vw);margin:0 auto;padding:0 20px}
+    .section{padding:72px 0}
+    h1,h2,h3{margin:0 0 10px}
+    h2{font-size:clamp(30px,5.2vw,44px);line-height:1.15}
+    p.lead{font-size:18px;color:var(--muted);line-height:1.6;max-width:880px;margin:0 auto}
+    body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+      radial-gradient(1200px 600px at 18% 40%, rgba(255,138,0,.35),transparent 60%),
+      radial-gradient(1200px 600px at 82% 22%, rgba(15,176,255,.35),transparent 60%),
+      linear-gradient(135deg,#000 0%,#0b1220 35%,#101d2e 62%,#0b1220 82%,#000 100%);filter:saturate(1.12) brightness(1.02)}
+    body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(80% 60% at 50% 30%,transparent 60%,rgba(0,0,0,.35) 100%)}
+    .site-nav{position:sticky;top:0;z-index:60;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(180deg,rgba(8,12,22,.90),rgba(8,12,22,.66));border-bottom:1px solid var(--line)}
+    .site-nav .wrap{display:flex;justify-content:center;gap:min(5.2vw,34px);padding:12px 0}
+    .site-nav a{font-weight:800;letter-spacing:.02em;opacity:.92;white-space:nowrap}
+    .site-nav a:hover,.site-nav a.active{opacity:1;color:var(--gold1)}
+    .header{position:sticky;top:48px;z-index:50;backdrop-filter:saturate(140%) blur(8px);background:linear-gradient(180deg,rgba(8,12,22,.85),rgba(8,12,22,.55));border-bottom:1px solid var(--line)}
+    .header .wrap{display:flex;align-items:center;justify-content:center;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
+    .logo{width:52px;height:52px;border-radius:8px;overflow:hidden;flex-shrink:0}
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .name{font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:15px;line-height:1}
+    .sub{font-size:11px;letter-spacing:.15em;opacity:.75;line-height:1}
+    .btn{display:inline-block;padding:14px 22px;border-radius:14px;font-weight:800;letter-spacing:.02em;color:#101012;background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);border:1px solid rgba(255,219,140,.7);box-shadow:0 18px 32px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.6);position:relative;overflow:hidden}
+    .btn::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.25)18%,rgba(255,255,255,0)36%);transform:translateX(-120%);transition:transform .8s ease}
+    .btn:hover::after{transform:translateX(120%)}
+    .btn.secondary{background:#0e1524;color:var(--ink);border:1px solid rgba(255,255,255,.14)}
+    .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+    .hero{padding:84px 0 44px;text-align:center}
+    .kicker{font-weight:900;letter-spacing:.32em;font-size:12px;opacity:.7;text-transform:uppercase}
+    .title{font-size:clamp(36px,6vw,62px);line-height:1.08;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+    .title em{color:var(--gold1);font-style:normal}
+    .subtxt{margin:12px auto 0;color:var(--muted);font-size:18px;max-width:880px}
+    .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+    .accent{height:3px;width:min(360px,60vw);margin:18px auto;background:linear-gradient(90deg,var(--accent),#fcb040,var(--blue));border-radius:3px;opacity:.95}
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:960px){.grid.cols-3{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.grid.cols-3{grid-template-columns:1fr}}
+    .card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:18px;box-shadow:0 16px 30px rgba(0,0,0,.35)}
+    .card h4{margin:0 0 6px;font-size:18px}
+    .card p{margin:6px 0 0;color:var(--muted)}
+    .step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.16);border-radius:14px;padding:14px}
+    .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f9df96 0%,#b9861b45%,#0fb0ff100%);color:#111;font-weight:900;border:1px solid rgba(255,219,140,.6)}
+    .pricing{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+    @media(max-width:960px){.pricing{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.pricing{grid-template-columns:1fr}}
+    .tier{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px;position:relative;overflow:hidden}
+    .tier::before{content:"";position:absolute;inset:-30% -10%50% -10%;background:radial-gradient(60%40% at40%50%,rgba(255,138,0,.18),transparent62%);pointer-events:none;filter:blur(16px)}
+    .tier h4{margin:4px 06px;font-size:20px}
+    .tier .desc{color:var(--muted);font-size:14px;margin:6px 012px}
+    .tier .price{font-weight:900;font-size:24px;margin:6px 010px}
+    .tier ul{padding-left:16px;margin:10px 014px}
+    .tier li{margin:6px 0;color:var(--muted)}
+    .footer{padding:26px 0;text-align:center;border-top:1px solid var(--line);opacity:.92}
+    .footer small{display:block;letter-spacing:.18em;text-transform:uppercase}
+    .form-field{width:100%;padding:10px12px;margin:6px 012px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:var(--ink)}
+    .form-field::placeholder{color:#c7ced8;opacity:.7}
+    .helper{font-size:13px;color:var(--muted);margin-top:6px}
+    .center{text-align:center}
+    .mt6{margin-top:6px}
+    .mt14{margin-top:14px}
+    .mt18{margin-top:18px}
   </style>
 </head>
-
 <body>
-
-  <!-- =========================
-       GLOBAL NAV (5 ITEMS)
-  ========================== -->
   <nav class="site-nav" aria-label="Main navigation">
     <div class="container wrap">
       <a class="active" href="index.html">Home</a>
@@ -497,260 +94,91 @@
     </div>
   </nav>
 
-  <!-- =========================
-       BRAND BAR (LOGO + NAME)
-  ========================== -->
   <header class="header">
     <div class="container wrap">
       <a class="brand" href="index.html" aria-label="SD Advisory Group Home">
-        <div class="logo">
-          <img
-            src="assets/images/self-defi-logo.png"
-            alt="Self-Defi Logo"
-          />
-        </div>
-        <div>
-          <div class="name">SD Advisory Group</div>
-          <div class="sub">Powered by Self-Defi</div>
-        </div>
+        <div class="logo"><img src="assets/images/self-defi-logo.png" alt="Self-Defi Logo" /></div>
+        <div><div class="name">SD Advisory Group</div><div class="sub">Powered by Self-Defi</div></div>
       </a>
     </div>
   </header>
 
-  <!-- =========================
-       MAIN CONTENT
-  ========================== -->
   <main id="top">
-
-    <!-- ===== HERO ===== -->
     <section class="hero center" aria-labelledby="hero-title">
       <div class="container">
         <div class="kicker">Live Advisory • Video &amp; Phone</div>
-
-        <h1 id="hero-title" class="title">
-          Your Assets. <em>Your Control.</em> Your Strategy.
-        </h1>
-
-        <p class="subtxt">
-          SD Advisory Group delivers live, one-on-one and small-group consultations to help investors and entrepreneurs gain control over their digital assets with confidence.
-          We specialize in secure custody setup, digital asset organization, and personalized growth strategies — direct, high-impact advisory.
-        </p>
-
+        <h1 id="hero-title" class="title">Your Assets. <em>Your Control.</em> Your Strategy.</h1>
+        <p class="subtxt">SD Advisory Group delivers live, one-on-one and small-group consultations to help investors and entrepreneurs gain control over their digital assets with confidence. We specialize in secure custody setup, digital asset organization, and personalized growth strategies — direct, high-impact advisory.</p>
         <div class="hero cta" role="group" aria-label="Primary calls to action">
-          <a
-            class="btn"
-            href="https://cal.com/selfdeficonsultant/15min"
-            target="_blank"
-            rel="noopener"
-          >Book Consultation</a>
-
-          <a
-            class="btn secondary"
-            href="business.html"
-          >Explore Services</a>
+          <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book Consultation</a>
+          <a class="btn secondary" href="business.html">Explore Services</a>
         </div>
-
         <div class="accent" aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- ===== VALUE CARDS ===== -->
     <section class="section" aria-labelledby="value-cards">
       <div class="container">
         <h2 id="value-cards" class="center">Why work with us</h2>
-
         <div class="grid cols-3 mt18">
-          <div class="card">
-            <h4>Custody Confidence</h4>
-            <p>From wallet selection to backups and movement — execute safely with repeatable flows.</p>
-          </div>
-
-          <div class="card">
-            <h4>Organized Portfolio</h4>
-            <p>Structure, labeling, and documentation across exchange and on-chain holdings.</p>
-          </div>
-
-          <div class="card">
-            <h4>Disciplined Growth</h4>
-            <p>Risk-aligned frameworks that prioritize sustainability over speculation.</p>
-          </div>
+          <div class="card"><h4>Custody Confidence</h4><p>From wallet selection to backups and movement — execute safely with repeatable flows.</p></div>
+          <div class="card"><h4>Organized Portfolio</h4><p>Structure, labeling, and documentation across exchange and on-chain holdings.</p></div>
+          <div class="card"><h4>Disciplined Growth</h4><p>Risk-aligned frameworks that prioritise sustainability over speculation.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== APPROACH (ANCHOR TARGET) ===== -->
     <section id="approach" class="section" aria-labelledby="approach-title">
       <div class="container">
         <h2 id="approach-title" class="center">Approach</h2>
-
         <div class="grid cols-3 mt18">
-          <div class="card step">
-            <div class="num">1</div>
-            <div>
-              <strong>Baseline &amp; Goals</strong>
-              <p class="mt6">Quick discovery of current stack, capital mix, and objectives. Confirm scope and outcomes.</p>
-            </div>
-          </div>
-
-          <div class="card step">
-            <div class="num">2</div>
-            <div>
-              <strong>Custody &amp; Organization</strong>
-              <p class="mt6">Wallets, backups, and movement flows; structure holdings for clarity and control.</p>
-            </div>
-          </div>
-
-          <div class="card step">
-            <div class="num">3</div>
-            <div>
-              <strong>Strategy &amp; Rhythm</strong>
-              <p class="mt6">Sustainable rebalancing cadence and safety checks for long-term execution.</p>
-            </div>
-          </div>
+          <div class="card step"><div class="num">1</div><div><strong>Baseline &amp; Goals</strong><p class="mt6">Quick discovery of current stack, capital mix, and objectives. Confirm scope and outcomes.</p></div></div>
+          <div class="card step"><div class="num">2</div><div><strong>Custody &amp; Organisation</strong><p class="mt6">Wallets, backups, and movement flows; structure holdings for clarity and control.</p></div></div>
+          <div class="card step"><div class="num">3</div><div><strong>Strategy &amp; Rhythm</strong><p class="mt6">Sustainable rebalancing cadence and safety checks for long-term execution.</p></div></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== PRICING ===== -->
     <section class="section" aria-labelledby="pricing-title">
       <div class="container">
         <h2 id="pricing-title" class="center">Pricing</h2>
-
         <div class="pricing mt18">
-          <!-- Strategy Session -->
-          <div class="tier">
-            <h4>Strategy Session</h4>
-            <div class="price">$100 / 60 min</div>
-            <div class="desc">Focused consult to solve a specific problem or decision.</div>
-            <ul>
-              <li>Video or phone</li>
-              <li>Action checklist after the call</li>
-              <li>48-hour follow-up support</li>
-            </ul>
-            <a
-              class="btn"
-              href="https://cal.com/selfdeficonsultant/15min"
-              target="_blank"
-              rel="noopener"
-            >Book</a>
-          </div>
-
-          <!-- Onboarding Sprint -->
-          <div class="tier" style="border-color: rgba(255,219,140,.35)">
-            <h4>Onboarding Sprint (4 weeks)</h4>
-            <div class="price">Custom Scope</div>
-            <div class="desc">Hands-on transition to secure custody and organized holdings.</div>
-            <ul>
-              <li>Weekly live sessions</li>
-              <li>Wallet setup &amp; documentation</li>
-              <li>Portfolio structure &amp; risk plan</li>
-            </ul>
-            <a
-              class="btn"
-              href="consultation.html"
-            >Start</a>
-          </div>
-
-          <!-- Weekly Briefing (FormSubmit, no mail app) -->
-          <div class="tier" id="weekly-briefing">
-            <h4>Weekly Briefing</h4>
-            <div class="price">Request Invite</div>
-            <div class="desc">Accountability, Q&amp;A, and shared momentum.</div>
-            <ul>
-              <li>Small-group format</li>
-              <li>Progress checks</li>
-              <li>Live questions</li>
-            </ul>
-
-            <!-- Toggle button reveals inline form -->
-            <button
-              class="btn secondary"
-              id="briefingJoinBtn"
-              type="button"
-              aria-expanded="false"
-              aria-controls="briefingFormWrap"
-            >Join</button>
-
-            <!-- Hidden Sign-Up Form -->
-            <div id="briefingFormWrap" style="display:none; margin-top:14px;">
-              <!-- IMPORTANT: the first submission may trigger a verification email from FormSubmit to Self-Defi.Crypto@ud.me -->
-              <form
-                action="https://formsubmit.co/Self-Defi.Crypto@ud.me"
-                method="POST"
-              >
-                <!-- Visible fields -->
-                <input class="form-field" type="text"  name="Full Name" placeholder="Full Name" required />
-                <input class="form-field" type="email" name="Email"      placeholder="Email Address" required />
+          <div class="tier"><h4>Strategy Session</h4><div class="price">$100 / 60 min</div><div class="desc">Focused consult to solve a specific problem or decision.</div><ul><li>Video or phone</li><li>Action checklist after the call</li><li>48-hour follow-up support</li></ul><a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book</a></div>
+          <div class="tier" style="border-color:rgba(255,219,140,.35)"><h4>Onboarding Sprint (4 weeks)</h4><div class="price">Custom Scope</div><div class="desc">Hands-on transition to secure custody and organised holdings.</div><ul><li>Weekly live sessions</li><li>Wallet setup &amp; documentation</li><li>Portfolio structure &amp; risk plan</li></ul><a class="btn" href="consultation.html">Start</a></div>
+          <div class="tier" id="weekly-briefing"><h4>Weekly Briefing</h4><div class="price">Request Invite</div><div class="desc">Accountability, Q&amp;A, and shared momentum.</div><ul><li>Small-group format</li><li>Progress checks</li><li>Live questions</li></ul>
+            <button class="btn secondary" id="briefingJoinBtn" type="button" aria-expanded="false" aria-controls="briefingFormWrap">Join</button>
+            <div id="briefingFormWrap" style="display:none;margin-top:14px;">
+              <form action="https://formspree.io/f/xpwkzebl?redirect=https%3A%2F%2Fself-defi.github.io%2FSD-Advisors%2Findex.html%3Fsent%3D1%23weekly-briefing" method="POST">
+                <input class="form-field" type="text" name="Full Name" placeholder="Full Name" required />
+                <input class="form-field" type="email" name="Email" placeholder="Email Address" required />
                 <textarea class="form-field" name="Message" rows="4" placeholder="Why you’d like to join (optional)"></textarea>
-
-                <!-- FormSubmit options -->
-                <input type="hidden" name="_subject"  value="Weekly Briefing — New Request" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha"  value="false" />
-
-                <!-- Redirect back to this exact page and show success banner -->
-                <!-- UPDATE this URL if your repo path differs -->
-                <input type="hidden" name="_next" value="https://self-defi.github.io/SD-Advisors/index.html?sent=1#weekly-briefing" />
-
-                <!-- Optional auto-reply to the requester -->
-                <input type="hidden" name="_autoresponse" value="Thanks — your Weekly Briefing request is in. We’ll follow up with next steps." />
-
-                <!-- Honeypot (spam trap) -->
-                <input type="text" name="_honey" style="display:none" />
-
+                <input type="hidden" name="Form" value="Weekly Briefing Request" />
+                <input type="text" name="_gotcha" style="display:none" />
                 <button class="btn" type="submit">Send Request</button>
-                <div class="helper">No account needed. Your request is emailed to <strong>Self-Defi.Crypto@ud.me</strong>.</div>
+                <div class="helper">Submits securely via Formspree. We’ll email you next steps.</div>
               </form>
-
-              <!-- Success / Error messages (shown by script after redirect) -->
-              <div id="briefingOk" style="display:none; margin-top:12px; padding:10px; border-radius:10px; background:#0c2a18; color:#c8f7dc;">
+              <div id="briefingOk" style="display:none;margin-top:12px;padding:10px;border-radius:10px;background:#0c2a18;color:#c8f7dc;">
                 ✅ Request received. We’ll email next steps soon.
               </div>
-              <div id="briefingErr" style="display:none; margin-top:12px; padding:10px; border-radius:10px; background:#2a0c0c; color:#ffd5d5;">
+              <div id="briefingErr" style="display:none;margin-top:12px;padding:10px;border-radius:10px;background:#2a0c0c;color:#ffd5d5;">
                 ⚠️ Something went wrong. Please use the email link below.
               </div>
-
-              <noscript>
-                <p class="mt6">JavaScript is disabled. You can also
-                  <a href="mailto:Self-Defi.Crypto@ud.me?subject=Weekly%20Briefing%20Request">email your request</a>.
-                </p>
-              </noscript>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== CONTACT (ANCHOR TARGET) ===== -->
     <section id="contact" class="section" aria-labelledby="contact-title">
       <div class="container center">
         <h2 id="contact-title">Contact</h2>
-
-        <p class="lead">
-          Email:
-          <a href="mailto:Self-Defi.Crypto@ud.me">Self-Defi.Crypto@ud.me</a>
-        </p>
-
-        <p class="lead" style="margin-top: 8px">
-          Prefer a quick call? Book a time that works for you.
-        </p>
-
-        <div class="mt14">
-          <a
-            class="btn"
-            href="https://cal.com/selfdeficonsultant/15min"
-            target="_blank"
-            rel="noopener"
-          >Book Consultation</a>
-        </div>
+        <p class="lead">Email: <a href="mailto:Self-Defi.Crypto@ud.me">Self-Defi.Crypto@ud.me</a></p>
+        <p class="lead" style="margin-top:8px">Prefer a quick call? Book a time that works for you.</p>
+        <div class="mt14"><a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book Consultation</a></div>
       </div>
     </section>
-
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
   <footer class="footer" role="contentinfo">
     <div class="container center">
       <small>SD Advisory Group — Powered by Self-Defi</small>
@@ -758,37 +186,24 @@
     </div>
   </footer>
 
-  <!-- =========================
-       SCRIPTS
-  ========================== -->
   <script>
-    // Toggle Weekly Briefing form
     (function(){
       const btn  = document.getElementById('briefingJoinBtn');
       const wrap = document.getElementById('briefingFormWrap');
-      if(!btn || !wrap) return;
-
-      btn.addEventListener('click', () => {
-        const isHidden = wrap.style.display === 'none' || wrap.style.display === '';
-        wrap.style.display = isHidden ? 'block' : 'none';
-        btn.setAttribute('aria-expanded', String(isHidden));
+      if(!btn||!wrap) return;
+      btn.addEventListener('click',()=>{
+        const hidden = wrap.style.display==='none'||wrap.style.display==='';
+        wrap.style.display = hidden?'block':'none';
+        btn.setAttribute('aria-expanded',String(hidden));
       });
     })();
-
-    // Show success banner when coming back from FormSubmit
     (function(){
-      const params = new URLSearchParams(window.location.search);
       const ok  = document.getElementById('briefingOk');
       const err = document.getElementById('briefingErr');
-
-      if (params.get('sent') === '1' && ok) {
-        ok.style.display = 'block';
-      }
-      if (params.get('err') === '1' && err) {
-        err.style.display = 'block';
-      }
+      const params = new URLSearchParams(window.location.search);
+      if(params.get('sent')==='1' && ok) ok.style.display='block';
+      if(params.get('err')==='1' && err) err.style.display='block';
     })();
   </script>
 </body>
 </html>
-   
