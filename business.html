@@ -1,123 +1,320 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>SD Advisory Group — Business Architecture</title>
-  <meta name="description" content="Self-Defi business architecture, DeFi integration, and sovereign treasury systems."/>
+
+  <title>SD Advisory Group — Services</title>
+  <meta name="description" content="Business custody frameworks, treasury governance design, and operational runbooks. Non-custodial. We never hold keys."/>
+  <meta name="theme-color" content="#0b0f17" />
+
   <link rel="icon" href="assets/images/self-defi-logo.png" type="image/png"/>
+  <meta property="og:image" content="https://self-defi.github.io/SD-Advisors/assets/images/self-defi-logo.png" />
+
   <style>
-    /* Shared theme (same as index) */
-    :root{--bg0:#0b0b0c;--bg1:#0f1013;--fg:#e7e7ea;--fg-d:#b7b7bd;--gold:#f3d18c;--line:rgba(255,255,255,.06);--card:#15171b;--shadow:0 24px 72px rgba(0,0,0,.48);--radius:14px;--maxw:1160px}
+    :root{
+      --ink:#e9edf1; --muted:#a9b0bb; --bg:#070a0f;
+      --gold1:#f9df96; --gold2:#b9861b; --blue:#0fb0ff; --accent:#ffb300;
+      --line:rgba(255,255,255,.14);
+      --card:rgba(255,255,255,.04);
+      --card2:rgba(255,255,255,.03);
+      --shadow:0 16px 30px rgba(0,0,0,.35);
+    }
     *{box-sizing:border-box}
-    html,body{margin:0;background:
-      radial-gradient(1200px 820px at 18% -12%, rgba(243,209,140,.12), transparent 58%),
-      linear-gradient(180deg,var(--bg0),var(--bg1));
-      color:var(--fg);font:15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
-    a{color:var(--gold);text-decoration:none}
-    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
-    nav.nav{display:flex;justify-content:center;gap:28px;padding:18px 0;background:linear-gradient(180deg,#0b0b0c,#111214);border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.35);position:sticky;top:0;z-index:10}
-    nav.nav a{color:#e7e7ea;font-weight:700}
-    nav.nav a.active, nav.nav a:hover{color:var(--gold)}
-    .section{padding:44px 0}
-    .h1{font-size:42px;line-height:1.1;letter-spacing:-.2px;margin:18px 0 10px;text-shadow:0 0 12px rgba(243,209,140,.34)}
-    .lead{font-size:18px;color:var(--fg-d);max-width:75ch}
-    .card{background:linear-gradient(180deg,#16181c,#0f1115);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .card-in{padding:18px}
-    .cols-3{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
-    @media (max-width:980px){.cols-3{grid-template-columns:1fr 1fr}}
-    @media (max-width:680px){.cols-3{grid-template-columns:1fr}}
-    ul.list{margin:10px 0 0 18px;color:var(--fg-d)}
-    .footer{padding:34px 0 64px;color:#8b8f98;border-top:1px solid var(--line);background:linear-gradient(180deg, rgba(12,12,14,.0), rgba(12,12,14,.25) 35%, rgba(8,8,10,1) 100%);font-size:13px;margin-top:48px}
+    html,body{height:100%;margin:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1100px,92vw);margin:0 auto;padding:0 20px}
+
+    body::before{
+      content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+        radial-gradient(1200px 600px at 18% 40%, rgba(255,138,0,.35),transparent 60%),
+        radial-gradient(1200px 600px at 82% 22%, rgba(15,176,255,.35),transparent 60%),
+        linear-gradient(135deg,#000 0%,#0b1220 35%,#101d2e 62%,#0b1220 82%,#000 100%);
+      filter:saturate(1.12) brightness(1.02)
+    }
+    body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(80% 60% at 50% 30%,transparent 60%,rgba(0,0,0,.35) 100%)}
+
+    /* Top Bar */
+    .topbar{
+      position:sticky;top:0;z-index:60;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(180deg,rgba(8,12,22,.92),rgba(8,12,22,.60));
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;min-width:240px}
+    .logo{width:46px;height:46px;border-radius:10px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 18px rgba(0,0,0,.35)}
+    .logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .name{font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:14px;line-height:1.05}
+    .sub{font-size:11px;letter-spacing:.15em;opacity:.75;line-height:1.1;margin-top:2px}
+    .nav{display:flex;gap:min(4.6vw,28px);justify-content:center;flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
+    .nav a{font-weight:800;letter-spacing:.02em;opacity:.90;white-space:nowrap;padding:6px 0}
+    .nav a:hover,.nav a.active{opacity:1;color:var(--gold1)}
+
+    .btn{
+      display:inline-block;
+      padding:12px 18px;border-radius:14px;
+      font-weight:900;letter-spacing:.02em;
+      color:#101012;
+      background:linear-gradient(135deg,#f9df96 0%,#b9861b 45%,#0fb0ff 100%);
+      border:1px solid rgba(255,219,140,.70);
+      box-shadow:0 18px 32px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.55);
+      position:relative;overflow:hidden;
+    }
+    .btn::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.25) 18%,rgba(255,255,255,0) 36%);transform:translateX(-120%);transition:transform .8s ease}
+    .btn:hover::after{transform:translateX(120%)}
+    .btn.secondary{background:#0e1524;color:var(--ink);border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 26px rgba(0,0,0,.45)}
+
+    /* Content */
+    .section{padding:64px 0}
+    h1{margin:0 0 10px;font-size:clamp(34px,5.8vw,54px);line-height:1.1;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+    h2{margin:0 0 12px;font-size:clamp(24px,3.8vw,34px);line-height:1.15}
+    p.lead{margin:10px 0 0;max-width:980px;color:var(--muted);font-size:18px}
+    .kicker{font-weight:900;letter-spacing:.32em;font-size:12px;opacity:.72;text-transform:uppercase}
+    .accent{height:3px;width:min(360px,60vw);margin:18px 0;background:linear-gradient(90deg,var(--accent),#fcb040,var(--blue));border-radius:3px;opacity:.95}
+
+    .trust-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .pill{
+      padding:8px 12px;border-radius:999px;
+      font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+      background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.90);
+    }
+
+    .grid{display:grid;gap:18px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media(max-width:980px){.grid.cols-3{grid-template-columns:1fr 1fr}}
+    @media(max-width:680px){.grid.cols-3{grid-template-columns:1fr}}
+    @media(max-width:640px){
+      .brand{min-width:auto}
+      .topbar .wrap{gap:12px}
+      .nav{gap:18px}
+    }
+
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px}
+    .card p{margin:8px 0 0;color:var(--muted)}
+    .card ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+    .card li{margin:6px 0}
+
+    .note{color:var(--muted);font-size:14px;max-width:980px}
+    .center{text-align:center}
+
+    .footer{padding:26px 0;text-align:center;border-top:1px solid var(--line);opacity:.92}
+    .footer small{display:block;letter-spacing:.18em;text-transform:uppercase}
+
+    :focus-visible{outline:2px solid rgba(15,176,255,.8);outline-offset:3px;border-radius:10px}
   </style>
 </head>
+
 <body>
+  <header class="topbar" aria-label="Top navigation">
+    <div class="container wrap">
+      <a class="brand" href="index.html" aria-label="SD Advisory Group Home">
+        <div class="logo"><img src="assets/images/self-defi-logo.png" alt="Self-Defi Logo" /></div>
+        <div>
+          <div class="name">SD Advisory Group</div>
+          <div class="sub">Powered by Self-Defi</div>
+        </div>
+      </a>
 
-  <nav class="nav">
-    <a href="index.html">Home</a>
-    <a class="active" href="business.html">Business</a>
-    <a href="consultation.html">Consultation</a>
-  </nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a class="active" href="business.html">Services</a>
+        <a href="consultation.html">Consultation</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
 
-  <main class="wrap">
+      <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
     <section class="section">
-      <h1 class="h1">Business Architecture & Sovereign Systems</h1>
-      <p class="lead">
-        We design secure, decentralized operating frameworks — from Bitcoin reserve policy to DeFi treasury governance —
-        and package them into runbooks your team can execute without us.
-      </p>
-    </section>
+      <div class="container">
+        <div class="kicker">Business & Treasury Advisory</div>
+        <h1>Business Architecture & Sovereign Operating Systems</h1>
+        <p class="lead">
+          We help teams design secure custody frameworks and treasury governance — then package them into clear runbooks
+          your organization can execute independently. This is advisory + implementation support with you in control.
+        </p>
 
-    <section class="section">
-      <h2 style="font-size:24px;margin:0 0 14px">Core packages</h2>
-      <div class="cols-3">
-        <div class="card"><div class="card-in">
-          <h3>Bitcoin Reserve Vault</h3>
-          <p class="muted">Policy, quorum (2-of-3 / 3-of-5), spend limits, timelocks, and recovery procedures.</p>
-          <ul class="list"><li>Hardware segregation</li><li>Key ceremony & documentation</li><li>Drills & incident response</li></ul>
-        </div></div>
-        <div class="card"><div class="card-in">
-          <h3>DeFi Banking Stack</h3>
-          <p class="muted">Smart-account treasury with approvals, role-based policies, alerts, and monitoring.</p>
-          <ul class="list"><li>Safe{Wallet} governance</li><li>Spending rules & permissions</li><li>Off-ramp/on-ramp mapping</li></ul>
-        </div></div>
-        <div class="card"><div class="card-in">
-          <h3>Compliance & Audit-Ready Docs</h3>
-          <p class="muted">Evidence you’re operating safely — policies, flows, proof of control, and access logs.</p>
-          <ul class="list"><li>Change control & approvals</li><li>Role mapping & attestation</li><li>Disaster recovery binder</li></ul>
-        </div></div>
+        <div class="trust-row" aria-label="Trust markers">
+          <span class="pill">Non-custodial</span>
+          <span class="pill">We never hold keys</span>
+          <span class="pill">No fund management</span>
+          <span class="pill">Policy-first design</span>
+        </div>
+
+        <div class="accent" aria-hidden="true"></div>
+
+        <div style="margin-top:14px">
+          <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book 15-min intro</a>
+          <a class="btn secondary" href="consultation.html" style="margin-left:10px">Consultation page</a>
+        </div>
+
+        <p class="note" style="margin-top:12px">
+          Note: SD Advisory does not custody assets or manage funds. We provide education, setup guidance, documentation, and operating frameworks.
+        </p>
       </div>
     </section>
 
+    <!-- OFFERINGS -->
     <section class="section">
-      <h2 style="font-size:24px;margin:0 0 14px">Engagement flow</h2>
-      <div class="cols-3">
-        <div class="card"><div class="card-in"><h3>1) Discovery</h3><p class="muted">Free 15-minute scoping call to define target outcomes, constraints, and timeline.</p></div></div>
-        <div class="card"><div class="card-in"><h3>2) Assessment</h3><p class="muted">Stress-test current custody, governance, and operational risk. Output: prioritized punch-list.</p></div></div>
-        <div class="card"><div class="card-in"><h3>3) Deployment</h3><p class="muted">Implement the design: vaults, policies, approvals, monitoring, and drills.</p></div></div>
+      <div class="container">
+        <h2>Core service tracks</h2>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <h3>Bitcoin Reserve Vault</h3>
+            <p>
+              Reserve policy, roles &amp; quorum design (e.g., 2-of-3, 3-of-5), spend limits, recovery discipline,
+              and incident-response procedures — built for long-term control.
+            </p>
+            <ul>
+              <li>Key ceremony plan &amp; documentation</li>
+              <li>Separation of duties and backups</li>
+              <li>Drills and recovery testing</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Treasury Governance (Safe-ready)</h3>
+            <p>
+              Smart-account governance design using approvals, roles, and guardrails. Focus is control, auditability,
+              and safe execution — not speculation.
+            </p>
+            <ul>
+              <li>Roles, approvals, and limits</li>
+              <li>Allowlists and operational guardrails</li>
+              <li>Monitoring &amp; alerting plan</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Audit-Ready Operations</h3>
+            <p>
+              Documentation that proves how control works: policies, change control, access mapping, and runbooks.
+              Built to reduce mistakes and simplify oversight.
+            </p>
+            <ul>
+              <li>Change control &amp; approvals</li>
+              <li>Role mapping &amp; attestations</li>
+              <li>Disaster recovery binder</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- ENGAGEMENT FLOW -->
     <section class="section">
-      <h2 style="font-size:24px;margin:0 0 14px">Pricing</h2>
-      <div class="cols-3">
-        <div class="card"><div class="card-in">
-          <div class="small" style="color:var(--fg-d)">Strategy Session</div>
-          <div style="font-size:28px;font-weight:900;letter-spacing:-.3px">$100 / hour</div>
-          <div class="small" style="color:var(--fg-d)">First 15 minutes free</div>
-          <p><a class="btn" style="padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#1b1d22,#14161a);display:inline-block;font-weight:700" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Schedule</a></p>
-        </div></div>
-        <div class="card"><div class="card-in">
-          <div class="small" style="color:var(--fg-d)">Onboarding</div>
-          <div style="font-size:28px;font-weight:900;letter-spacing:-.3px">Scope-based</div>
-          <div class="small" style="color:var(--fg-d)">Quote after assessment</div>
-          <p><a class="btn" style="padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#1b1d22,#14161a);display:inline-block;font-weight:700" href="consultation.html">Start</a></p>
-        </div></div>
-        <div class="card"><div class="card-in">
-          <div class="small" style="color:var(--fg-d)">Weekly Briefing</div>
-          <div style="font-size:28px;font-weight:900;letter-spacing:-.3px">$100 / month</div>
-          <div class="small" style="color:var(--fg-d)">Cancel anytime</div>
-          <p><a class="btn" style="padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#1b1d22,#14161a);display:inline-block;font-weight:700" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Subscribe</a></p>
-        </div></div>
+      <div class="container">
+        <h2>How engagements run</h2>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <h3>1) Discovery</h3>
+            <p>
+              15-minute intro to confirm outcomes, constraints, and what “done” looks like.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>2) Assessment</h3>
+            <p>
+              Review current custody posture and operating risk. Output is a prioritized punch-list and recommended path.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>3) Implementation Support</h3>
+            <p>
+              Guided setup and documentation so your team can run it without guesswork.
+              Execution remains client-controlled at all times.
+            </p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h3>What you leave with</h3>
+          <p>
+            A written operating framework: roles, policies, checklists, and a repeatable cadence.
+            The goal is resilient execution — not dependency on the advisor.
+          </p>
+        </div>
       </div>
     </section>
 
+    <!-- PRICING -->
     <section class="section">
-      <div class="card"><div class="card-in" style="text-align:center">
-        <h3 style="margin:6px 0 6px">Ready to harden the business stack?</h3>
-        <p class="muted">Book a quick intro. We’ll align on scope and get a lean proof-of-concept moving.</p>
-        <p><a class="btn" style="padding:12px 16px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,#121212 0%, #2a1e0c 24%, #b88e35 52%, #f2d38d 88%);color:#fff;display:inline-block;font-weight:700" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book 15-min intro</a></p>
-      </div></div>
+      <div class="container">
+        <h2>Pricing</h2>
+
+        <div class="grid cols-3" style="margin-top:18px">
+          <div class="card">
+            <h3>Strategy Session</h3>
+            <p style="font-size:26px;font-weight:900;margin:6px 0 0">$100 / 60 min</p>
+            <p>Focused advisory to solve a specific decision or problem.</p>
+            <p style="margin-top:14px">
+              <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Schedule</a>
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Onboarding Sprint</h3>
+            <p style="font-size:26px;font-weight:900;margin:6px 0 0">Scope-based</p>
+            <p>Delivered after assessment. Built around your team, your stack, and your risk constraints.</p>
+            <p style="margin-top:14px">
+              <a class="btn secondary" href="consultation.html">Start</a>
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Weekly Briefing</h3>
+            <p style="font-size:26px;font-weight:900;margin:6px 0 0">Request Invite</p>
+            <p>Small-group accountability, Q&amp;A, and shared momentum.</p>
+            <p style="margin-top:14px">
+              <a class="btn secondary" href="mailto:Self-Defi.Crypto@ud.me?subject=Weekly%20Briefing%20Invite%20Request&body=Name%3A%0AEmail%3A%0A%0AWhy%20I%E2%80%99d%20like%20to%20join%3A">Request Invite</a>
+            </p>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:14px">
+          Note: SD Advisory provides education, setup guidance, and operating frameworks. We do not custody assets or manage funds.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="card center">
+          <h2 style="margin-bottom:6px">Ready to harden the business stack?</h2>
+          <p class="lead" style="max-width:880px;margin:0 auto">
+            Book a quick intro. We’ll align on scope and map the cleanest path to a proof-of-control setup.
+          </p>
+          <p style="margin-top:14px">
+            <a class="btn" href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book 15-min intro</a>
+          </p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap" style="text-align:center">
-      <div style="font-weight:700;color:var(--gold)">SD Advisory Group — Powered by Self-Defi</div>
-      <div style="margin-top:4px">Business Architecture • DeFi Integration • Audit-Ready Operations</div>
-      <div style="margin-top:10px">© 2025 SD Advisory Group · <a href="https://cal.com/selfdeficonsultant/15min" target="_blank" rel="noopener">Book Consultation</a></div>
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <small>SD Advisory Group — Powered by Self-Defi</small>
+      <small>Business Advisory • Custody Frameworks • Treasury Governance</small>
+      <small style="opacity:.7;margin-top:8px">© 2026</small>
     </div>
   </footer>
-
 </body>
 </html>
